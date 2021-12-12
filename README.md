@@ -53,7 +53,7 @@ then in Terminal →
 it’ll open up the browser to select the various options of Simulator for development purpose :
 
 
-<img src="https://firebasestorage.googleapis.com/v0/b/file-upload-15ce7.appspot.com/o/4.png?alt=media&token=83ec38ba-ba73-4828-9fd2-1dcbc1a9133a" alt="">
+<img src="https://firebasestorage.googleapis.com/v0/b/file-upload-15ce7.appspot.com/o/4.png?alt=media&token=0daa4efe-214f-4741-9204-9333d89e6c17" alt="">
 
 note: don’t cut this it’ll host our app (keep it in the browser)
 
@@ -78,5 +78,5 @@ then, refresh the Simulator →
 output :
 
 
-<img src="https://firebasestorage.googleapis.com/v0/b/file-upload-15ce7.appspot.com/o/7.jpg?alt=media&token=9dc1772d-b7b3-4537-8faa-db15982ffa07" alt="" width="500" height="600">
+<img src="https://firebasestorage.googleapis.com/v0/b/file-upload-15ce7.appspot.com/o/7.jpg?alt=media&token=9dc1772d-b7b3-4537-8faa-db15982ffa07" alt="" width="200" height="400">
 
