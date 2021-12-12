@@ -83,3 +83,5 @@ output :
 
 <img src="https://firebasestorage.googleapis.com/v0/b/file-upload-15ce7.appspot.com/o/7.jpg?alt=media&token=9dc1772d-b7b3-4537-8faa-db15982ffa07" alt="" width="200" height="400">
 
+
+### note: we have to create firebase-app, firebase config connection & firestore database also need to active Google APIs to get the app's database working with localhost...
