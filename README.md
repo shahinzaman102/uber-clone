@@ -4,6 +4,9 @@ https://expo.dev/@shahin_zaman/uber-clone-mobileApp
 
 # Run the app Locally
 
+Clone the project. After Cloning --> 
+
+
 If you are new to mobile development, the easiest way to get started is with Expo CLI. Expo is a set of tools built around React Native and, while it has many features,
 https://docs.expo.dev/
 the most relevant feature for us right now is that it can get you writing a React Native app within minutes. You will only need a recent version of Node.js and a phone or emulator.
