@@ -1,3 +1,7 @@
+#### This project is inspired by --> ####
+##### YouTube: https://www.youtube.com/watch?v=bvn_HYpix6s&ab_channel=SonnySangha #####
+
+
 # Deployed link --> 
 https://expo.dev/@shahin_zaman/uber-clone-mobileApp
 
