@@ -24,6 +24,7 @@ const data = [
 const NavOptions = () => {
     const navigation = useNavigation();
     const origin = useSelector(selectOrigin);
+    console.log("Origin:", origin); // Debugging
 
     return (
         <FlatList

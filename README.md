@@ -1,91 +1,77 @@
-#### This project is inspired by --> ####
-##### YouTube: https://www.youtube.com/watch?v=bvn_HYpix6s&ab_channel=SonnySangha #####
+# 🚖 Uber Clone (Minimal)
 
+This is a minimal Uber clone project built primarily to showcase Google Maps integration using:
 
-# Deployed link --> 
-https://expo.dev/@shahin_zaman/uber-clone-mobileApp
+* 🗺️ Places API — for location autocomplete and place details
 
+* 🧭 Directions API — for drawing routes between pickup and drop-off points
 
-# Run the app Locally
+* 📏 Distance Matrix API — for estimating travel time and distance
 
-Clone the project. After Cloning --> 
+The core functionality allows a user to:
 
+* Select a pickup and drop-off location using Google Places Autocomplete
 
-If you are new to mobile development, the easiest way to get started is with Expo CLI. Expo is a set of tools built around React Native and, while it has many features,
-https://docs.expo.dev/
-the most relevant feature for us right now is that it can get you writing a React Native app within minutes. You will only need a recent version of Node.js and a phone or emulator.
+* View the route drawn on a map
 
-https://reactnative.dev/docs/environment-setup
+* Calculate and display estimated distance and duration
 
-Terminal :
-		`npm install -g expo-cli`
+* Simulate requesting a ride (no actual booking or backend logic) 
 
-we need to add sudo in mac (to give the Super-User write access permission)
-to do so → 
-		`sudo npm install -g expo-cli`
+## 🧪Future Improvements (Optional Enhancements)
 
-then give the mac user password (if it’s admin user)
+This basic Uber-style app can be improved with more advanced features for a more realistic testing and user experience:
 
-note: when we want to install packages globally in mac then we need to add sudo (super user do) in front of that command for security purpose (& then we need to give the password)
+### 💳 Payment Integration
 
-to know about sudo in mac → 
-https://superuser.com/questions/185441/what-does-the-sudo-command-do
+Add functionality to process in-app payments using platforms like Stripe, Razorpay, or PayPal.
 
-	`expo init uber-clone`
+### 🍔 Uber Eats Module
 
+Extend the app to include food ordering and delivery, similar to Uber Eats, with restaurant menus, order tracking, and driver integration.
 
-<img src="https://firebasestorage.googleapis.com/v0/b/file-upload-15ce7.appspot.com/o/1.png?alt=media&token=6d877c82-56e4-44bf-8ee7-0c00b4bdcc60" alt="">
+### 📲 Deployment Readiness
 
+The project can be further prepared for production and released on platforms like the Google Play Store after:
 
-hit Enter → it’ll by default choose blank (the 1st selected one)
+* Adding proper backend and database integration
 
+* Implementing user authentication
 
-<img src="https://firebasestorage.googleapis.com/v0/b/file-upload-15ce7.appspot.com/o/2.png?alt=media&token=7754f91d-6ca8-41af-b6af-6589889ced00" alt="">
+* Ensuring security best practices are followed
 
+* Performing rigorous testing on various Android devices
 
-expo : 
+### ⚙️ Tech Stack
 
-expo is really good for many reasons - it allows you to easily test on your phone, on android before if you had to develop for ios you couldn’t actually do it easily unless you had a mac in fact you couldn't do it you needed to have xcode now with expo you can actually do this.
-when you’re installing dependencies makes it so much easier.
+**Frontend:** React Native (or any mobile framework of your choice)
 
+**Maps Integration:** Google Maps SDK
 
-<img src="https://firebasestorage.googleapis.com/v0/b/file-upload-15ce7.appspot.com/o/3.png?alt=media&token=19d5496b-9d44-46a7-a72a-a24c27bcb495" alt="">
+**APIs Used:**
 
+* Google **Places API**
 
-then in Terminal → 
+* Google **Directions API**
 
-	`expo start`    /    `npm start`
+* Google **Distance Matrix API**
 
+## 📦 Setup Instructions
 
-it’ll open up the browser to select the various options of Simulator for development purpose :
+Clone the repository:
 
+    git clone <https://github.com/shahinzaman102/uber-clone>
+    cd uber-clone
 
-<img src="https://firebasestorage.googleapis.com/v0/b/file-upload-15ce7.appspot.com/o/4.png?alt=media&token=0daa4efe-214f-4741-9204-9333d89e6c17" alt="">
+Install dependencies:
 
-note: don’t cut this it’ll host our app (keep it in the browser)
+    yarn install
+    - Then, Configure the .env file with your Google Maps API Key and enable the required APIs in your Google Cloud Console.
 
+Run the app:
 
-click on Run on iOS simulator → it’ll open up the iOS Simulator for the app with XCode :
-we’ll see app Home-screen in the Simulator
+    yarn start --reset-cache
 
-Terminal :
+## 📝 Disclaimer
 
-<img src="https://firebasestorage.googleapis.com/v0/b/file-upload-15ce7.appspot.com/o/5.png?alt=media&token=99b81f16-8a6c-4239-84fb-8fd82377af67" alt="">
-
-now, in the terminal → click i :
-
-it’ll forcely start the app on the Simulator :
-
-
-<img src="https://firebasestorage.googleapis.com/v0/b/file-upload-15ce7.appspot.com/o/6.png?alt=media&token=c7e1c8e7-1ace-4293-8393-3de21893ab6f" alt="">
-
-
-then, refresh the Simulator → 
-
-output :
-
-
-<img src="https://firebasestorage.googleapis.com/v0/b/file-upload-15ce7.appspot.com/o/7.jpg?alt=media&token=9dc1772d-b7b3-4537-8faa-db15982ffa07" alt="" width="200" height="400">
-
-
-### note: we have to create firebase-app, firebase config connection & firestore database also need to active Google APIs to get the app's database working with localhost...
+This is a learning/demo project and is not affiliated with Uber Technologies, Inc. It is built purely to demonstrate the use of Google Maps APIs within a mobile app context.

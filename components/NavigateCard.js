@@ -26,6 +26,12 @@ const NavigateCard = () => {
                         returnKeyType={"search"}
                         minLength={2}
                         onPress={(data, details = null) => {
+                            if (!details?.geometry?.location) {
+                                alert("Location data is missing. Please try again.");
+                                return;
+                            }
+
+                            console.log("Selected destination location:", details.geometry.location);
                             dispatch(
                                 setDestination({
                                     location: details.geometry.location,
@@ -40,7 +46,6 @@ const NavigateCard = () => {
                             key: GOOGLE_MAPS_APIKEY,
                             language: "en",
                         }}
-                        placeholder="where to?"
                         nearbyPlacesAPI="GooglePlacesSearch"
                         distance={400}
                     />

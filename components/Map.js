@@ -1,12 +1,11 @@
-import React, { useEffect, useRef } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import MapView, { Marker } from 'react-native-maps'
-import MapViewDirections from 'react-native-maps-directions'
-import { useSelector } from 'react-redux'
-import tw from 'tailwind-react-native-classnames'
-import { selectDestination, selectOrigin, setTravelTimeInformation } from '../slices/navSlice'
+import React, { useEffect, useRef } from 'react';
+import { StyleSheet } from 'react-native';
+import MapView, { Marker } from 'react-native-maps';
+import MapViewDirections from 'react-native-maps-directions';
+import { useSelector, useDispatch } from 'react-redux';
+import tw from 'tailwind-react-native-classnames';
+import { selectDestination, selectOrigin, setTravelTimeInformation } from '../slices/navSlice';
 import { GOOGLE_MAPS_APIKEY } from "@env";
-import { useDispatch } from 'react-redux'
 
 const Map = () => {
     const origin = useSelector(selectOrigin);
@@ -14,58 +13,82 @@ const Map = () => {
     const mapRef = useRef(null);
     const dispatch = useDispatch();
 
+    // Fit map to origin and destination markers
     useEffect(() => {
         if (!origin || !destination) return;
 
-        // Zoom & fit to makers
         mapRef.current.fitToSuppliedMarkers(['origin', 'destination'], {
             edgePadding: { top: 50, right: 50, bottom: 50, left: 50 },
         });
     }, [origin, destination]);
 
+    // Fetch travel time between origin and destination
     useEffect(() => {
         if (!origin || !destination) return;
 
         const getTravelTime = async () => {
-            fetch(
-                `https://maps.googleapis.com/maps/api/distancematrix/json?
-                units=imperial&origins=${origin.description}&destination=
-                ${destination.description}&key=${GOOGLE_MAPS_APIKEY}`
-            )
-                .then((res) => res.json())
-                .then((data) => {
-                    // console.log(data);
+            try {
+                const originLatLng = `${origin.location.lat},${origin.location.lng}`;
+                const destinationLatLng = `${destination.location.lat},${destination.location.lng}`;
+
+                console.log("Fetching travel time from:", originLatLng, "to:", destinationLatLng);
+
+                const response = await fetch(
+                    `https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${originLatLng}&destinations=${destinationLatLng}&key=${GOOGLE_MAPS_APIKEY}`
+                );
+
+                const data = await response.json();
+                console.log("Travel time data:", data);
+
+                if (data.status === "OK" && data.rows[0] && data.rows[0].elements[0]) {
                     dispatch(setTravelTimeInformation(data.rows[0].elements[0]));
-                });
+                } else {
+                    console.error("Error: Unable to retrieve travel time data.");
+                }
+            } catch (error) {
+                console.error("Error fetching travel time:", error);
+            }
         };
+
         getTravelTime();
-    }, [origin, destination, GOOGLE_MAPS_APIKEY])
+    }, [origin, destination, GOOGLE_MAPS_APIKEY, dispatch]);
 
     return (
         <MapView
             style={tw`flex-1`}
-            mapType="mutedStandard"
-
+            ref={mapRef}
             initialRegion={{
-                latitude: origin.location.lat,
-                longitude: origin.location.lng,
+                latitude: origin?.location?.lat || 37.78825,
+                longitude: origin?.location?.lng || -122.4324,
                 latitudeDelta: 0.005,
                 longitudeDelta: 0.005,
             }}
+            region={destination && origin ? {
+                latitude: (origin.location.lat + destination.location.lat) / 2,
+                longitude: (origin.location.lng + destination.location.lng) / 2,
+                latitudeDelta: Math.abs(origin.location.lat - destination.location.lat) * 2,
+                longitudeDelta: Math.abs(origin.location.lng - destination.location.lng) * 2,
+            } : undefined}
         >
-            {origin && destination && (
+            {origin?.location && destination?.location && (
                 <MapViewDirections
-                    origin={origin.description}
-                    destination={destination.description}
+                    origin={{
+                        latitude: origin.location.lat,
+                        longitude: origin.location.lng,
+                    }}
+                    destination={{
+                        latitude: destination.location.lat,
+                        longitude: destination.location.lng,
+                    }}
                     apikey={GOOGLE_MAPS_APIKEY}
-                    strokewidth={3}
+                    strokeWidth={3}
                     strokeColor="black"
                 />
             )}
 
             {origin?.location && (
                 <Marker
-                    Coordinate={{
+                    coordinate={{
                         latitude: origin.location.lat,
                         longitude: origin.location.lng,
                     }}
@@ -77,7 +100,7 @@ const Map = () => {
 
             {destination?.location && (
                 <Marker
-                    Coordinate={{
+                    coordinate={{
                         latitude: destination.location.lat,
                         longitude: destination.location.lng,
                     }}
@@ -86,11 +109,10 @@ const Map = () => {
                     identifier="destination"
                 />
             )}
-
         </MapView>
-    )
-}
+    );
+};
 
-export default Map
+export default Map;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

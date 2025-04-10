@@ -36,13 +36,17 @@ const HomeScreen = () => {
                         }
                     }}
                     onPress={(data, details = null) => {
-                        // console.log(data);
-                        // console.log(details);
-                        dispatch(setOrigin({
-                            location: details.geometry.location,
-                            description: data.description
-                        }))
+                        if (!details || !details.geometry) {
+                            console.error("Invalid place details:", details);
+                            return;
+                        }
 
+                        const location = details.geometry.location;
+                        console.log("Selected origin location:", location);
+                        dispatch(setOrigin({
+                            location,
+                            description: data.description,
+                        }));
                         dispatch(setDestination(null));
                     }}
                     fetchDetails={true}
